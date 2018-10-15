@@ -1,0 +1,73 @@
+*, 
+*:before, 
+*:after { 
+  box-sizing: border-box; 
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+	background-color: $white;
+	color: $white;
+	font-family: $f-roboto; 
+}
+
+.btn {
+	background: none;
+	border: 2px solid $white;
+	border-radius: 20%;
+	font-size: 30px;
+	width: 45px;
+	height: 45px;
+	
+	&--add {
+	}
+
+	&--delete {
+
+	}
+}
+
+.todo {
+	width: 75%;
+	max-width: 450px;
+	margin: 0 auto;
+	background: $bg-gradient;
+	border-radius: 10px;
+	padding: 25px;
+}
+
+
+.form {
+	width: 100%;
+	margin: 0 0 25px 0;
+
+	display: flex;
+	justify-content: space-between;
+
+	&__group {
+		position: relative;
+		width: 100%;
+	}
+
+	&__label {
+		position: absolute;
+		top:  50%;
+		left: 5px;
+		transform: translateY(-50%);
+	}
+
+	&__input {
+		background: transparent;
+		width: 100%;
+		height: 45px;
+		border: none;
+		border-bottom: 1px solid $white;
+
+		&:focus {
+			outline: none;
+		}
+	}
+}
+

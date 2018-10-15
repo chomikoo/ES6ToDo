@@ -1,0 +1,80 @@
+<!doctype html>
+
+<html lang="pl-PL">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>ToDo App</title>
+    <meta name="description" content="ToDo App">
+    <meta name="author" content="Chomikoo">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#4285f4">
+    <!-- favicons/icons -->
+    <link rel="apple-touch-icon" sizes="120x120" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <!-- css -->
+    <link type="text/css" rel="stylesheet" href="css/style.min.css">
+
+</head>
+
+<body>
+
+    <main>
+
+        <section class="todo">
+
+            <form action="" class="form" id="form">
+
+                <div class="form-group">
+                    <label for="todo-task" class="form__label">Treść zadania:</label>
+                    <input id="todo-task" type="text">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn--add">&#x002B;</button>
+                </div>
+
+            </form>
+
+            <div class="list">
+                <header class="list__header">
+                    <h2 class="header__title">
+                        Lista zadań
+                    </h2>
+
+                    <form action="" class="form list__search">
+                        <div class="form-group">
+                            <label for="list-task" class="form__label">Szukaj:</label>
+                            <input id="list-task" type="text">
+                        </div>
+                    </form>
+                </header>
+
+                <div class="list__container" id="list">
+
+                    <div class="list__element task">
+                        <div class="task__bar">
+                            <h3 class="task__date">14-10-2018 // 20:07-</h3>
+                            <button class="task-delete" title="Usuń">&#x2796;</button>
+                        </div>
+
+                        <div class="task__text">
+                            To jest testowe zadanie !!
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/script.min.js"></script>
+
+</body>
+
+</html>
