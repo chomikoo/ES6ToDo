@@ -84,7 +84,7 @@ body {
 		border: none;
 		border-bottom: 1px solid $white;
 
-		&:focus {
+		&:focus , &:valid {
 			outline: none;
 
 			+#{$f}__label {
@@ -92,6 +92,7 @@ body {
 				opacity: 0.6;
 			}
 		}
+
 	}
 }
 
