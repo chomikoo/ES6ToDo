@@ -7,15 +7,15 @@
 			this.form = document.getElementById(id);
 			this.listToDo = document.getElementById('listToDo');
 			this.listDone = document.getElementById('listDone');
+			this.todoArr = (localStorage.getItem('todo')) ? JSON.parse((localStorage.getItem('todo'))) : [];
 			
-			this.todoArr = [];
-	
 			this.events();
 		}
 		
 		// events/
 		events() {
 			this.arrayRender();
+
 			this.form.addEventListener('submit', (e) => {
 				e.preventDefault();
 				let input = this.form.querySelector('#todo-task');
@@ -35,6 +35,7 @@
  
 		createTask(ob, i) {
 			// this.todoArr.push(ob);
+			console.log('create ', ob);
 
 			// SINGLE TASK WRAPPER
 			const todoWrapper = document.createElement('li');
@@ -54,6 +55,7 @@
 			const deleteBtn = document.createElement('button');
 			deleteBtn.innerText = "🗑";
 			deleteBtn.classList.add('btn');
+
 			deleteBtn.addEventListener('click', function(e){
 				this.deleteTask(e);
 			}.bind(this));
@@ -61,6 +63,7 @@
 			const checkBtn = document.createElement('button');
 			checkBtn.innerText = "✓";
 			checkBtn.classList.add('btn', 'btn--checked');
+
 			checkBtn.addEventListener('click', function(e){
 				this.checkTask(e)
 			}.bind(this));
