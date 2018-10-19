@@ -1,87 +1,164 @@
 (function () {
 	'use strict';
 
-	// DOM elements
-	const form = document.getElementById('form');
-	const taskList = document.getElementById('taskList');
+	class Todo {
+		constructor(id) {
+			// DOM elements
+			this.form = document.getElementById(id);
+			this.listToDo = document.getElementById('listToDo');
+			this.listDone = document.getElementById('listDone');
+			
+			this.todoArr = [];
+	
+			this.events();
+		}
+		
+		// events/
+		events() {
+			this.arrayRender();
+			this.form.addEventListener('submit', (e) => {
+				e.preventDefault();
+				let input = this.form.querySelector('#todo-task');
+				const task = new Task(input.value);
+				
+				this.todoArr.push(task);
+				this.createTask(task);
+				this.storageUpdate();
+
+				input.value = '';
+				
+			});
+		}
+
+		//methods/
+
+ 
+		createTask(ob, i) {
+			// this.todoArr.push(ob);
+
+			// SINGLE TASK WRAPPER
+			const todoWrapper = document.createElement('li');
+			todoWrapper.classList.add('task', 'slide');
+			todoWrapper.setAttribute("id", ob.id)
+
+			const todoContent = document.createElement('div');
+			todoContent.classList.add('task__content');
+			todoContent.innerText = ob.text;
+
+			const todoDate = document.createElement('span');
+			todoDate.classList.add('task__date');
+			todoDate.innerText = ob.date;
+
+			todoContent.appendChild(todoDate);
+
+			const deleteBtn = document.createElement('button');
+			deleteBtn.innerText = "🗑";
+			deleteBtn.classList.add('btn');
+			deleteBtn.addEventListener('click', function(e){
+				this.deleteTask(e);
+			}.bind(this));
+
+			const checkBtn = document.createElement('button');
+			checkBtn.innerText = "✓";
+			checkBtn.classList.add('btn', 'btn--checked');
+			checkBtn.addEventListener('click', function(e){
+				this.checkTask(e)
+			}.bind(this));
+
+			todoWrapper.appendChild(todoContent);
+			todoWrapper.appendChild(deleteBtn);
+			todoWrapper.appendChild(checkBtn);
+			
+			if(ob.checked) {
+				listDone.insertBefore(todoWrapper, listDone.childNodes[0]);
+			} else {
+				listToDo.insertBefore(todoWrapper, listToDo.childNodes[0]);
+			}
+
+		}
+
+		arrayRender() {
+			JSON.parse(localStorage.getItem('todo')).forEach((elem, i)=>{				
+				setTimeout(() => {
+					this.createTask(elem,i);
+				}, 350*i);
+			});
+		}
+
+		storageUpdate() {
+			localStorage.setItem('todo', JSON.stringify(this.todoArr));
+		}
+
+		deleteTask(e) {
+			const item = e.target.parentNode;
+			this.todoArr = this.todoArr.filter(obj => obj.id !== item.id );
+			
+			item.classList.add('slide--out');
+			setTimeout(()=>{
+				item.parentNode.removeChild(item);
+			}, 200);
+			
+			this.storageUpdate();
+		}
+
+		checkTask(e) {
+			const item = e.target.parentNode;
+
+			this.todoArr.forEach((ob) => {
+				// console.log(ob.id);
+				console.log('check ' + ob.checked);
+
+				if (ob.id === item.id) {
+					if( !ob.checked ) {
+						ob.checked = true;
+					} else {
+						ob.checked = false;
+					}
+					this.createTask(ob);
+				}
+
+			});
+
+			item.classList.add('slide--out');
+			setTimeout(()=>{
+				item.parentNode.removeChild(item);
+			}, 100);
 
 
-	const taskArr = [];
+			this.storageUpdate();
 
-	const getTime = () => {
-		const data = new Date();
-		return `${data.getDate()}-${data.getMonth()+1}-${data.getFullYear()} || ${data.getHours()}:${data.getMinutes()} `
-	}
 
-	const generateID = () => {
-		const chars = '0123456789abcdefghiklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXTZ';
-		let id = 'task-';
+		}
 
-		for (let i = 0; i < 10; i++) {
-			id += chars[Math.floor(Math.random() * chars.length)];
 
-		};
-
-		return id;
 	}
 
 
 	class Task {
 		constructor(text = 'Zadanie') {
-			this.id = generateID(),
+			console.log('Task  ',this);
+
+			this.id = this.generateID(),
 			this.type = "task",
 			this.text = text;
-			this.date = getTime();
+			this.date = this.getTime();
+			this.checked = false;
 		}
 
-
-		remove() {
-			console.log(`remove ${this.text}`);
+		generateID() {
+			return Math.random().toString(36).substring(2, 8);
 		}
+
+		getTime() {
+			const data = new Date();
+			return `${data.getDate()}-${data.getMonth()+1}-${data.getFullYear()} || ${data.getHours()}:${(data.getMinutes() < 10 ) ? '0'+data.getMinutes() : data.getMinutes()} `
+		}
+
 	}
 
 
-	// Dodawanie Zadania do tablicy 
 
-	form.addEventListener('submit', function (e) {
-		e.preventDefault();
-		let input = document.getElementById('todo-task');
-
-		taskArr.unshift(new Task(input.value));
-		console.log(taskArr);
-		input.value = '';
-
-		arrayRender();
-	});
-
-	// Usowanie elementu
-
-	taskList.addEventListener('click', (e) => {
-		console.log(e);		
-		console.log(e.target.parentElement.id);
-		const index = taskArr.findIndex(x => x.id == e.target.id);
-		console.log(index)
-
-		arrayRender();
-	})
-
-	// Render tablicy 
-
-	const arrayRender = () => {
-		taskList.innerHTML = '';
-		taskArr.forEach((elem, i) => {
-			// console.log(elem, i);
-			taskList.innerHTML += 
-			`<div class="task" id="${elem.id}">
-				<div class="task__content">
-						${elem.text}
-					<span class="task__date">${elem.date}</span>
-				</div>
-				<button class="btn btn--delete" title="Usuń">&#x2212;</button>
-			</div>`;
-		});
-	}
-
-
+	// INIT TODO
+	const TODO = new Todo("form");
 
 })();

@@ -78,6 +78,7 @@ gulp.task('scripts', () => {
 	return gulp.src([
 			'src/js/script.js'
 		])
+		.pipe(plumber())
 		.pipe(concat('script.min.js'))
 		.pipe(babili({
 			mangle: {

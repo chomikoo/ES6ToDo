@@ -9,7 +9,11 @@
 html,
 body {
 	padding: 50px 0 0 0;
-	background-color: $white;
+	background: #C9D6FF;
+	background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);
+	background: linear-gradient(to right, #E2E2E2, #C9D6FF);
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 	color: $white;
 	font-family: $f-roboto;
 }
@@ -22,8 +26,9 @@ body {
 
 .btn {
 	background: none;
-	border: 2px solid $white;
-	border-radius: 20%;
+	border: none;
+	// border: 2px solid $white;
+	// border-radius: 20%;
 	font-size: 30px;
 	width: 45px;
 	height: 45px;
@@ -31,7 +36,9 @@ body {
 
 	&--add {}
 
-	&--delete {}
+	&--checked {
+		border-left: 1px solid $white;
+	}
 
 	&:hover {
 		opacity: 0.5;
@@ -84,7 +91,8 @@ body {
 		border: none;
 		border-bottom: 1px solid $white;
 
-		&:focus , &:valid {
+		&:focus,
+		&:valid {
 			outline: none;
 
 			+#{$f}__label {
@@ -115,7 +123,17 @@ body {
 		margin: 0;
 	}
 
+	&__todo {
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid $white04;
+	}
 
+	&__done {
+		.task {
+			opacity: 0.5;
+		}
+	}
 
 
 }
@@ -130,12 +148,16 @@ body {
 	padding: 10px;
 	margin: 0 0 10px 0;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-	box-shadow: 0 0 0 rgba(255,255, 255, 0.1);
+	box-shadow: 0 0 0 rgba(255, 255, 255, 0.1);
 	transition: all 0.1s ease-in-out;
+
+	&--checked {
+		opacity: 0.5;
+	}
 
 	&:hover {
 		border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-		box-shadow: 0 1px 1px rgba(255,255, 255, 0.5);
+		box-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
 	}
 
 	&__content {
@@ -149,5 +171,23 @@ body {
 		width: 100%;
 		font-size: 12px;
 		opacity: 0.7;
+	}
+}
+
+// Animations
+
+.slide {
+	animation: slide 0.3s ease-in-out;
+	
+	&--out {
+		opacity: 0;
+		transform: translateX(300px);
+	}
+}
+
+@keyframes slide {
+	from {
+		opacity: 0;
+		transform: translateX(300px);
 	}
 }
