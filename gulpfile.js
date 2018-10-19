@@ -78,6 +78,7 @@ gulp.task('scripts', () => {
 	return gulp.src([
 			'src/js/script.js'
 		])
+		.pipe(plumber())
 		.pipe(concat('script.min.js'))
 		.pipe(babili({
 			mangle: {
@@ -87,7 +88,8 @@ gulp.task('scripts', () => {
 		.on('error', function (err) {
 			gutil.log(gutil.colors.red('[Error]'), err.toString());
 		})
-		.pipe(gulp.dest('dist/js/'));
+		.pipe(gulp.dest('dist/js/'))
+		.pipe(browserSync.stream())
 });
 
 gulp.task('copy', () => {
@@ -107,10 +109,10 @@ gulp.task('images', () => {
 });
 
 
-gulp.task('watch', ['browserSync', 'styles'], () => {
-	gulp.watch('src/sass/**/*.scss', ['styles'], browserSync.reload());
-	gulp.watch('src/js/**/*.js', ['scripts'], browserSync.reload());
-	gulp.watch('src/**/*.html', ['copy'], browserSync.reload());
+gulp.task('watch', ['browserSync', 'styles', 'scripts'], () => {
+	gulp.watch('src/sass/**/*.scss', ['styles']);
+	gulp.watch('src/js/**/*.js', ['scripts']);
+	gulp.watch('src/**/*.html', ['copy'], browserSync.reload);
 })
 
 

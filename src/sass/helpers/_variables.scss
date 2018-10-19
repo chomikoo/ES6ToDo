@@ -9,19 +9,22 @@ $xl: 1100px;
 // COLORS 
 
 $white: #ffffff;
-$black: #000000;
-$c-black-light: #1A1A1A;
-$c-grey-dark: #383838;
-$c-purple: #800080;
+$white04: rgba(255, 255, 255, 0.4);
 
-$c-orange: #FFC935;
+$black: #000000;
+
+
+
+$bg-header-gradient: linear-gradient(to left, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+ /* Chrome 10-25, Safari 5.1-6 */
+$bg-gradient: linear-gradient(to left, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 
 // TYPOGRAPHY
 
-$f-mukta: 'Mukta', sans-serif;
-$f-nunito: 'Nunito Sans', sans-serif;
-$f-news: 'News Cycle', sans-serif;
-
+$f-roboto: 'Roboto', sans-serif;
+$f-opensans: 'Open Sans', sans-serif;
 // Spacers
 
 
