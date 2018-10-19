@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html lang="pl-PL">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>ToDo App</title>
+    <meta name="description" content="ToDo App">
+    <meta name="author" content="Chomikoo">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#4285f4">
+    <!-- favicons/icons -->
+    <link rel="apple-touch-icon" sizes="120x120" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <!-- css -->
+    <link type="text/css" rel="stylesheet" href="css/style.min.css">
+
+</head>
+
+<body>
+
+    <main>
+
+        <section class="todo">
+
+            <form action="" class="form" id="form">
+
+                <div class="form__group">
+                    <input id="todo-task" class="form__input" type="text" required> 
+                    <label for="todo-task" class="form__label">Treść zadania:</label>
+                </div> 
+
+                <button type="submit" class="btn btn--add">&#x002B;</button>
+
+
+            </form>
+
+            <div id="taskList" class="list" >
+                <header class="list__header"> 
+                    <h2 class="list__title">
+                        Lista zadań
+                    </h2>
+
+                    <form action="" class="form list__search">
+                        <div class="form__group">
+                            <input id="list-task" class="form__input" type="text" required>
+                            <label for="list-task" class="form__label">&#128269; Szukaj:</label>
+                        </div>
+                    </form>
+                </header>
+
+                    <ul id="listToDo"></ul>
+                    <ul id="listDone"></ul>
+
+                <!-- <div class="list__container task" id="task-rand">
+
+                    <div class="task__content">
+                        To jest testowe zadanie !!
+                        <span class="task__date">14-10-2018 || 20:07</span>
+                    </div>
+
+                    <button class="btn btn--delete" title="Usuń">&#x2212;</button>
+
+                </div> -->
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                families: ['Open+Sans|Roboto&amp;subset=latin-ext']
+            }
+        });
+    </script>
+
+    <script src="js/script.min.js"></script>
+
+</body>
+
+</html>
