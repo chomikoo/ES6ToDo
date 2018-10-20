@@ -7,6 +7,7 @@
 			this.form = document.getElementById(id);
 			this.listToDo = document.getElementById('listToDo');
 			this.listDone = document.getElementById('listDone');
+			this.searchInput = document.getElementById('list-task');
 			this.todoArr = (localStorage.getItem('todo')) ? JSON.parse((localStorage.getItem('todo'))) : [];
 			
 			this.events();
@@ -28,14 +29,30 @@
 				input.value = '';
 				
 			});
+
+			this.searchInput.addEventListener('input', e => {
+				e.preventDefault();
+
+				const elementsSearch = document.querySelectorAll('#listToDo > li, #listDone > li')
+				const filter = e.target.value.toLowerCase();
+
+				elementsSearch.forEach(function(element) {
+					console.log(element);
+					if( element.innerText.indexOf(filter) > -1 ) {
+						element.style.display = "";
+					} else {
+						element.style.display = "none";
+					}
+				});
+
+			})
 		}
 
 		//methods/
 
  
 		createTask(ob, i) {
-			// this.todoArr.push(ob);
-			console.log('create ', ob);
+			// console.log('create ', ob);
 
 			// SINGLE TASK WRAPPER
 			const todoWrapper = document.createElement('li');
@@ -130,9 +147,11 @@
 
 			this.storageUpdate();
 
-
 		}
 
+		searchTask() {
+
+		}
 
 	}
 
