@@ -33,27 +33,18 @@
 			this.searchInput.addEventListener('input', e => {
 				e.preventDefault();
 
-				const elementsSearch = document.querySelectorAll('#listToDo > li, #listDone > li')
+				const elementsSearch = document.querySelectorAll('#listToDo > li, #listDone > li');
 				const filter = e.target.value.toLowerCase();
 
 				elementsSearch.forEach(function(element) {
-					console.log(element);
-					if( element.innerText.indexOf(filter) > -1 ) {
-						element.style.display = "";
-					} else {
-						element.style.display = "none";
-					}
+					element.style.display = ( element.innerText.indexOf(filter) > -1 ) ? "" : "none";
 				});
-
 			})
 		}
 
 		//methods/
-
  
-		createTask(ob, i) {
-			// console.log('create ', ob);
-
+		createTask(ob) {
 			// SINGLE TASK WRAPPER
 			const todoWrapper = document.createElement('li');
 			todoWrapper.classList.add('task', 'slide');
@@ -94,13 +85,12 @@
 			} else {
 				listToDo.insertBefore(todoWrapper, listToDo.childNodes[0]);
 			}
-
 		}
 
 		arrayRender() {
-			JSON.parse(localStorage.getItem('todo')).forEach((elem, i)=>{				
+			this.todoArr.forEach((elem,i)=>{				
 				setTimeout(() => {
-					this.createTask(elem,i);
+					this.createTask(elem);
 				}, 350*i);
 			});
 		}
@@ -125,15 +115,9 @@
 			const item = e.target.parentNode;
 
 			this.todoArr.forEach((ob) => {
-				// console.log(ob.id);
-				console.log('check ' + ob.checked);
 
 				if (ob.id === item.id) {
-					if( !ob.checked ) {
-						ob.checked = true;
-					} else {
-						ob.checked = false;
-					}
+					ob.checked = ( !ob.checked ) ? true : false ;
 					this.createTask(ob);
 				}
 
@@ -144,13 +128,7 @@
 				item.parentNode.removeChild(item);
 			}, 100);
 
-
 			this.storageUpdate();
-
-		}
-
-		searchTask() {
-
 		}
 
 	}
@@ -158,8 +136,6 @@
 
 	class Task {
 		constructor(text = 'Zadanie') {
-			console.log('Task  ',this);
-
 			this.id = this.generateID(),
 			this.type = "task",
 			this.text = text;
@@ -177,8 +153,6 @@
 		}
 
 	}
-
-
 
 	// INIT TODO
 	const TODO = new Todo("form");
